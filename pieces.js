@@ -47,16 +47,6 @@ boutonTrier.addEventListener("click", function () {
      console.log(piecesOrdonnees);
 });
 
-const boutonTrierDecroissant = document.querySelector(".btn-trier-decroissant");
-
-boutonTrierDecroissant.addEventListener("click", function () {
-    const piecesOrdonneesDecroissant = Array.from(pieces);
-    piecesOrdonneesDecroissant.sort(function (a, b) {
-        return b.prix - a.prix;
-     });
-     console.log(piecesOrdonneesDecroissant);
-});
-
 const boutonFiltrer = document.querySelector(".btn-filtrer");
 
 boutonFiltrer.addEventListener("click", function () {
@@ -66,16 +56,66 @@ boutonFiltrer.addEventListener("click", function () {
    console.log(piecesFiltrees)
 });
 
-const boutonDescription = document.querySelector(".btn-desc");
-
-boutonDescription.addEventListener("click", function () {
-    const piecesDescription = pieces.filter(function (piece) {
-        return (piece.description ? true : false);
-    });
-   console.log(piecesDescription)
+const boutonDecroissant = document.querySelector(".btn-decroissant");
+boutonDecroissant.addEventListener("click", function () {
+    const piecesOrdonnees = Array.from(pieces);
+    piecesOrdonnees.sort(function (a, b) {
+        return b.prix - a.prix;
+     });
+     console.log(piecesOrdonnees);
 });
 
+const boutonNoDescription = document.querySelector(".btn-nodesc");
+boutonNoDescription.addEventListener("click", function () {
+    const piecesFiltrees = pieces.filter(function (piece) {
+        return piece.description;
+    });
+   console.log(piecesFiltrees);
+});
+
+const noms = pieces.map(piece => piece.nom);
+for(let i = pieces.length -1 ; i >= 0; i--){
+    if(pieces[i].prix > 35){
+        noms.splice(i,1);
+    }
+}
+
+//Création de la liste
+const abordablesElements = document.createElement('ul');
+//Ajout de chaque nom à la liste
+for(let i=0; i < noms.length ; i++){
+    const nomElement = document.createElement('li');
+    nomElement.innerText = noms[i];
+    abordablesElements.appendChild(nomElement)
+}
+// Ajout de l'en-tête puis de la liste au bloc résultats filtres
+document.querySelector('.abordables')
+    .appendChild(abordablesElements)
 
 
+const piecesDisponibles = pieces.map(piece => piece.nom);
+for(let i = pieces.length -1 ; i >= 0; i--){
+    if(!pieces[i].disponibilite){
+        piecesDisponibles.splice(i,1);
+    }
+}
+const prixDisponibles = pieces.map(piece => piece.prix);
+for(let i = pieces.length -1 ; i >= 0; i--){
+    if(!pieces[i].disponibilite){
+        prixDisponibles.splice(i,1);
+    }
+}
 
+//Création de la liste
+const disponiblesElements = document.createElement('ul');
+//Ajout de chaque nom à la liste
+for(let i=0; i < piecesDisponibles.length ; i++){
+    const Element = document.createElement('li');
+    let text = `${piecesDisponibles[i]} - ${prixDisponibles[i]} €.`
+    Element.innerText = text;
+    disponiblesElements.appendChild(Element)
+}
 
+// Ajout de l'en-tête puis de la liste au bloc résultats filtres
+document.querySelector('.disponibles')
+    .appendChild(disponiblesElements)
