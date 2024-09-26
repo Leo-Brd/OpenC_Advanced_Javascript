@@ -40,7 +40,7 @@ function genererPieces(pieces){
 
 genererPieces(pieces);
 
- //gestion des bouttons 
+ //gestion des boutons 
 const boutonTrier = document.querySelector(".btn-trier");
 
 boutonTrier.addEventListener("click", function () {
@@ -52,11 +52,12 @@ boutonTrier.addEventListener("click", function () {
     genererPieces(piecesOrdonnees);
 });
 
+
 const boutonFiltrer = document.querySelector(".btn-filtrer");
 
 boutonFiltrer.addEventListener("click", function () {
     const piecesFiltrees = pieces.filter(function (piece) {
-        return piece.prix <= 35;
+        return piece.prix <= Value;
     });
     document.querySelector(".fiches").innerHTML = "";
     genererPieces(piecesFiltrees);
@@ -83,6 +84,15 @@ boutonNoDescription.addEventListener("click", function () {
     document.querySelector(".fiches").innerHTML = "";
     genererPieces(piecesFiltrees);
 });
+
+const inputPrixMax = document.querySelector("#slider")
+inputPrixMax.addEventListener("input", (event) => {
+    const piecesFiltrees = pieces.filter(function(piece){
+        return piece.prix <= inputPrixMax.value
+    })
+    document.querySelector(".fiches").innerHTML = "";
+    genererPieces(piecesFiltrees);
+})
 
 const noms = pieces.map(piece => piece.nom);
 for(let i = pieces.length -1 ; i >= 0; i--){
