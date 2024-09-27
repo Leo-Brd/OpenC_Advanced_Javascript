@@ -41,8 +41,7 @@ function genererPieces(pieces){
         //Code aJouté
         pieceElement.appendChild(avisBouton);
     
-     }
-    
+    }
     ajoutListenersAvis();
 }
 
