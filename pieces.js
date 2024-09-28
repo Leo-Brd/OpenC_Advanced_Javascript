@@ -162,4 +162,5 @@ inputPrixMax.addEventListener('input', function(){
 const boutonMettreAJour = document.querySelector(".btn-maj");
 boutonMettreAJour.addEventListener("click", function () {
    window.localStorage.removeItem("pieces");
+   window.localStorage.removeItem("avis");
 });
